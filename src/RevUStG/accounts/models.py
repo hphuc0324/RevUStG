@@ -28,7 +28,7 @@ class Order(models.Model):
     customer = models.OneToOneField(Customer, null = True, on_delete=models.SET_NULL)
 
     def __str__(self) -> str:
-        return 'Order of' + self.customer.__str__  
+        return str('Order of' + self.customer.__str__)  
 
 
 class Tag(models.Model):
@@ -76,17 +76,17 @@ class Account(models.Model):
     id = models.CharField(max_length= 15, primary_key=True)
 
     def __str__(self) -> str:
-        return self.id
+        return self.username
 
 
 class PurchasedItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null= True)
+    customer = models.CharField(max_length=100, null=True)
     time = models.DateField(null = True)
     account = models.ForeignKey(Account, on_delete=models.SET_NULL, null= True)
+    item_id = models.CharField(max_length=100, null=True)
 
     def __str__(self) -> str:
-        return self.customer.__str__ + ' item'
-    
- 
+        return str(self.item_id)
+
 
 

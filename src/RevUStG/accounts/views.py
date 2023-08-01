@@ -22,7 +22,7 @@ def home(request):
 
     context = {'is_logged_in': is_logged_in}
 
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
 def register(request):
     register_form = RegisterForm()
@@ -68,7 +68,7 @@ def login(request):
             
             context = {"is_admin": is_admin}
 
-            return render(request,'index.html', context)
+            return render(request,'home.html', context)
         else:
             messages.info(request, "Username or Password incorrect")
 
@@ -78,7 +78,12 @@ def customer(request, name):
     user = User.objects.get(username = name)
     customer = Customer.objects.get(user=user)
 
-    context = {'customer' : customer}
+    try:
+        purchased_item = PurchasedItem.objects.filter(customer = name)
+        print(purchased_item)
+    except:
+        purchased_item = None
+    context = {'customer' : customer, 'purchased_item' : purchased_item}
 
     return render(request, 'customer.html', context)
 
