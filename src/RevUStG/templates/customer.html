@@ -18,7 +18,7 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{%static 'assets/css/fontawesome.css'%}">
-    <link rel="stylesheet" href="{%static 'assets/css/templatemo-cyborg-gaming.css'%}">
+    <link rel="stylesheet" href="{%static 'assets/css/main.css'%}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css'%}">
     <link rel="stylesheet" href="{%static 'assets/css/animate.css'%}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
@@ -34,36 +34,7 @@ https://templatemo.com/tm-579-cyborg-gaming
 <body>
 
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                  
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="{%url 'home'%}">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
-                        <li><a href="details.html">Details</a></li>
-                        <li><a href="streams.html">Streams</a></li>
-                        <li><a href="profile.html" class="active">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+  {% include 'navbar.html' with cart_items=cart_items %}
 
   <div class="container">
     <div class="row">
@@ -112,8 +83,8 @@ https://templatemo.com/tm-579-cyborg-gaming
                 {% for item in purchased_item %}
                 <div class="item">
                   <ul>
-                    <li><img src="assets/images/game-01.jpg" alt="" class="templatemo-item"></li>
-                    <li><h4>{{item.account.product.name}}</h4><span>Sandbox</span></li>
+                    <li><img src="{{item.product.avt_img.url}}" alt="" class="templatemo-item"></li>
+                    <li><h4>{{item.account.product.name}}</h4><span></span>NUll</li>
                     <li><h4>Username</h4><span>{{item.account.username}}</span></li>
                     <li><h4>Password</h4><span>{{item.account.password}}</span></li>
                     <li><h4>Currently</h4><span>Downloaded</span></li>

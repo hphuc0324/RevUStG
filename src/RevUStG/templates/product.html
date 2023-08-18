@@ -1,0 +1,230 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <!--
+
+TemplateMo 579 Cyborg Gaming
+
+https://templatemo.com/tm-579-cyborg-gaming
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Header Area Start ***** -->
+  {% include 'navbar.html' with cart_items=cart_items %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Featured Start ***** -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="feature-banner header-text">
+                <div style= "display: flex; justify-content: space-between;"class="row">
+                  <div class="col-lg-4">
+                    <img class="fit-img" src="{{product.avt_img.url}}" alt="" style="border-radius: 23px;">
+                  </div>
+                  <div class="col-lg-8">
+                    <div style = "width: 700px; display: flex; flex-direction: column; justify-content: space-evenly;" class = "top-streamers">
+                      <!-- First row -->
+                      <div style="display: flex; justify-content: space-between;">
+                        <div>
+                          <h2>{{product.name}} <h2>
+                        </div>
+
+                        <div style="display: flex;">
+                          {% if favor == 'True' %}
+                              <img style="width: 40px; height: 40px;" src= "{% static 'assets/images/favorite_red.png' %}">
+                          {% else %}
+                              <img style="width: 40px; height: 40px;" src= "{% static 'assets/images/favorite_black.png' %}">
+                          {% endif %}
+                          <div class="main-border-button"><a href="{% url 'favor' product.id %}">ADD TO FAVORITE</a></div>
+                        </div>
+                      </div>
+                      <!-- End first row -->
+
+                      <!-- Second row -->
+                      <div style="display: flex; justify-content: space-between;">                   
+                        <h2>Status:  {{status}}</h2>
+                        
+                        {% if status == 'Instock' %}
+                        <div  class="main-border-button"><a style="padding: 12px 44px;" href="{% url 'add_to_cart' product.id %}">ADD TO CART</a></div>
+                        {% else %}
+                        <div  class="main-border-button border-no-active"><a style="padding: 12px 44px;" href="#" onclick="return false">ADD TO CART</a></div>
+                        {% endif %}
+                      </div>
+                      <!-- End second row -->
+                      
+                       <!-- Third row -->
+                       <div style="display: flex; justify-content: space-between;">                   
+                        <h2 style="font-family:'Bootstrap-icons';">Sell price:  {{product.sell_price}} &#xF634;</h2> 
+                        {% if status == 'Instock' %}
+                        <div  class="main-border-button"><a style="padding: 12px 78px;" href="{% url 'buy' product.id %}">BUY</a></div>
+                        {% else %}
+                        <div  class="main-border-button border-no-active"><a style="padding: 12px 78px;" href="#">BUY</a></div>
+                        {% endif %}
+                      </div>
+                      <!-- End Third row -->
+
+                        <!-- 4th row -->
+                        <div style="display: flex; justify-content: space-between;">                   
+                          <h2 style="font-family:'Bootstrap-icons';">Rent price:  {{product.rent_price}} &#xF634;</h2>
+                          {% if status == 'Instock' %}
+                          <div  class="main-border-button"><a style="padding: 12px 74px;" href="{% url 'rent' product.id %}">RENT</a></div>
+                          {% else %}
+                          <div  class="main-border-button border-no-active"><a style="padding: 12px 74px;" href="#">RENT</a></div>
+                          {% endif %} 
+                          
+                        </div>
+                        <!-- End 4th row -->
+
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Featured End ***** -->
+
+          <!-- ***** Details Start ***** -->
+          <div class="game-details">
+            <div class="row">
+              <div class="col-lg-12">
+                <h2>{{product.name}} Details</h2>
+              </div>
+              <div class="col-lg-12">
+                <div class="content">
+                  <div style="display: flex; flex-direction: column;" class="row">
+
+                    <!-- First row -->
+                    <div style="width: 100%; display: flex; justify-content: space-between;">
+                      <div style ="min-width: 450px; " class="col-lg-6">
+                        <div class="left-info">
+                          <div class="left">
+                            <h4>{{product.name}}</h4>
+                            <span>Sandbox</span>
+                          </div>
+                          <ul>
+                            <li><i class="fa fa-star"></i> 4.8</li>
+                            <li><i class="fa fa-download"></i> 2.3M</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div style ="min-width: 550px; " class="col-lg-6">
+                        <div class="right-info">
+                          <ul>
+                            <li><i class="fa fa-star"></i> 4.8</li>
+                            <li><i class="fa fa-download"></i> 2.3M</li>
+                            <li><i class="fa fa-server"></i> 36GB</li>
+                            <li><i class="fa fa-gamepad"></i> {{tag}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Second row -->          
+                    <div style="display: flex; justify-content: space-evenly;">
+                      {% for image in images %}
+                        <div class="col-lg-4">
+                          <img style = "width: 300px; height: 230px;" src="{{product.avt_img.url}}" alt="" style="border-radius: 23px; margin-bottom: 30px;">
+                        </div>
+                      {% endfor %} 
+                    </div>
+
+                    <!-- Third row -->
+                    <div class="col-lg-12">
+                      <p>{{product.description}}</p>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Details End ***** -->
+
+          <!-- ***** Other Start ***** -->
+          <div class="other-games">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Other Related</em> Games</h4>
+                </div>
+              </div>
+              {% for game in related_games %}      
+                <div class="col-lg-6">
+                  <a href="{% url 'product' game.id %}" class = "fill-div">          
+                    <div class="item">                   
+                        <img style = "width: 120px; height: 82px; object-fit: cover;" src="{{game.avt_img.url}}" alt="" class="templatemo-item">
+                        <h4>{{game.name}}</h4>
+                        <ul>
+                          <li><i class="fa fa-star"></i> 4.8</li>
+                          <li><i class="fa fa-download"></i>{{game.sell_price}}</li>
+                        </ul>
+                    </div>
+                  </a>      
+                </div>       
+              {% endfor %}
+            </div>
+          </div>
+          <!-- ***** Other End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
+          
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>  Distributed By <a href="https://themewagon.com" target="_blank" >ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{%static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{%static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script src="{%static 'assets/js/popup.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+  </body>
+
+</html>

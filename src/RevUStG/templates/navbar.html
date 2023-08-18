@@ -1,0 +1,68 @@
+
+   <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="index.html" class="logo">
+                          <img src="assets/images/logo.png" alt="">
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                     <!-- ***** Search End ***** -->
+                     <div class="search-input">
+                      <form id="search" method="POST" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                        <i class="fa fa-search"></i>
+                      </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      
+                        
+                          <a href="{% url 'cart' request.user %}" style ="margin-top: 10px; font-size: 25px;" class="fas fa-shopping-cart ">
+                          </a>
+                          <span
+                            class="badge bg-danger"
+                            style="width: 40px;
+                            height: 40px;
+                            padding: 15.2px 7.8px;
+                            font-size: 30px;
+                            border-radius: 26px;
+                            transform: perspective(0px) translate(-12px) rotate(0deg) scale(0.50);
+                            transform-origin: top;
+                            padding-right: 0;
+                            padding-top: 0.2px;
+                            padding-left: 0.2px;
+                            text-align: center;border-width: 48px;
+                            color: white;
+                            background-color: red;
+                          ">{{cart_items}}</span>
+                        
+                       
+                         
+      
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        {% if user.is_authenticated%}
+                          <li><a href="{% url 'customer' request.user.username %}">Profile</a></li>
+                          <li><a href="{% url 'logout'%}">Logout</a></li>
+                        {% endif %}
+  
+                        {% if user.is_authenticated is False %}
+                          <li class ="hover-effect"><a href="{% url 'login'%}">Login</a></li>
+                          <li ><a href="{% url 'register'%}">Register</a></li>
+                        {% endif %}
+  
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+    </header>

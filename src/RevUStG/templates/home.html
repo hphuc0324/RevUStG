@@ -18,10 +18,11 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--
 
 TemplateMo 579 Cyborg Gaming
@@ -32,50 +33,7 @@ https://templatemo.com/tm-579-cyborg-gaming
   </head>
 
 <body>
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                   <!-- ***** Search End ***** -->
-                   <div class="search-input">
-                    <form id="search" action="#">
-                      <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                      <i class="fa fa-search"></i>
-                    </form>
-                  </div>
-                  <!-- ***** Search End ***** -->
-                  <!-- ***** Menu Start ***** -->
-                  <ul class="nav">
-                      <li><a href="{% url 'home' %}" class="active">Home</a></li>
-                      <li><a href="browse.html">Browse</a></li>
-                      <li><a href="details.html">Details</a></li>
-                      {% if user.is_authenticated%}
-                        <li><a href="{% url 'customer' request.user.username %}">Profile</a></li>
-                        <li><a href="{% url 'logout'%}">Logout</a></li>
-                      {% endif %}
-
-                      {% if user.is_authenticated is False %}
-                        <li><a href="{% url 'login'%}">Login</a></li>
-                      {% endif %}
-
-                  </ul>   
-                  <a class='menu-trigger'>
-                      <span>Menu</span>
-                  </a>
-                  <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+  {% include 'navbar.html' with cart_items=cart_items %}
 
   <div class="container">
     <div class="row">
@@ -87,384 +45,82 @@ https://templatemo.com/tm-579-cyborg-gaming
             <div class="col-lg-8">
               <div class="featured-games header-text">
                 <div class="heading-section">
-                  <h4><em>Live</em> Streams</h4>
+                  <h4><em>Hot</em> Games</h4>
                 </div>
+                
                 <div class="owl-features owl-carousel">
+                {% for product in hot_games%}
+                <a href="{% url 'product' product.id%}" class = "fill-div">
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
+                      <img src="{{product.cover_img.url}}" alt="">
                       <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
+                        <h6>{{product.name}}</h6>
                       </div>
                     </div>
-                    <h4>CS-GO<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
                   </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="{%static 'assets/images/featured-02.jpg' %}" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Gamezer<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>CS-GO<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="{%static 'assets/images/featured-02.jpg' %}" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>CCC<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Island Rusty<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>CS-GO<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-02.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Gamezer<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Island Rusty<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
+                </a>
+                {% endfor %} 
                 </div>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="top-streamers">
                 <div class="heading-section">
-                  <h4><em>Top</em> Streamers</h4>
+                  <h4><em>Platforms</em></h4>
                 </div>
                 <ul>
+                  {% for platform in platforms %}
                   <li>
-                    <span>01</span>
-                    <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
-                    <h6><i class="fa fa-check"></i> LahutaM</h6>
+                    <img src="{{platform.platform_icon.url}}" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <h6>{{platform.platform}}</h6>
                     <div class="main-button">
-                      <a href="#">Follow</a>
+                      <a href="{% url 'category' platform.platform%}">Browse</a>
                     </div>
                   </li>
-                  <li>
-                    <span>02</span>
-                    <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
-                    <h6><i class="fa fa-check"></i> Kengan</h6>
-                    <div class="main-button">
-                      <a href="#">Follow</a>
-                    </div>
-                  </li>
-                  <li>
-                    <span>03</span>
-                    <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
-                    <h6><i class="fa fa-check"></i> Areluwa</h6>
-                    <div class="main-button">
-                      <a href="#">Follow</a>
-                    </div>
-                  </li>
-                  <li>
-                    <span>04</span>
-                    <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
-                    <h6><i class="fa fa-check"></i> Omeg</h6>
-                    <div class="main-button">
-                      <a href="#">Follow</a>
-                    </div>
-                  </li>
-                  <li>
-                    <span>05</span>
-                    <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
-                    <h6><i class="fa fa-check"></i> GangTeam</h6>
-                    <div class="main-button">
-                      <a href="#">Follow</a>
-                    </div>
-                  </li>
+
+                  {% endfor %}
                 </ul>
               </div>
             </div>
           </div>
           <!-- ***** Featured Games End ***** -->
-
-          <!-- ***** Live Stream Start ***** -->
-          <div class="live-stream">
-            <div class="col-lg-12">
-              <div class="heading-section">
-                <h4><em>Most Popular</em> Live Stream</h4>
-              </div>
-            </div>
+          <!-- ***** Most Popular Start ***** -->
+          {% for category in categories %}
+          <div class="most-popular">
             <div class="row">
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-05.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> Kengan Omeg</span>
-                    <h4>Just Talking With Fans</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-06.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> LahutaMalc</span>
-                    <h4>CS-GO 36 Hours Live Stream</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-07.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> Areluwa</span>
-                    <h4>Maybe Nathej Allnight Chillin'</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-08.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> NewGangTeam</span>
-                    <h4>Live Streaming Till Morning</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-07.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> Kengan Omeg</span>
-                    <h4>Just Talking With Fans</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-08.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> LahutaMalc</span>
-                    <h4>CS-GO 36 Hours Live Stream</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-05.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> Areluwa</span>
-                    <h4>Maybe Nathej Allnight Chillin'</h4>
-                  </div> 
-                </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                <div class="item">
-                  <div class="thumb">
-                    <img src="assets/images/stream-06.jpg" alt="">
-                    <div class="hover-effect">
-                      <div class="content">
-                        <div class="live">
-                          <a href="#">Live</a>
-                        </div>
-                        <ul>
-                          <li><a href="#"><i class="fa fa-eye"></i> 1.2K</a></li>
-                          <li><a href="#"><i class="fa fa-gamepad"></i> CS-GO</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="down-content">
-                    <div class="avatar">
-                      <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
-                    </div>
-                    <span><i class="fa fa-check"></i> NewGangTeam</span>
-                    <h4>Live Streaming Till Morning</h4>
-                  </div> 
-                </div>
-              </div>
               <div class="col-lg-12">
-                <div class="main-button">
-                  <a href="streams.html">Load More Streams</a>
+                <div class="heading-section">
+                  <h4>{{category.platform}}</h4>
+                </div>
+                <div class="row">
+                  {% for product in category.products %}
+                  <div class="col-lg-3 col-sm-6">
+                    <a href="{% url 'product' product.id%}" class = "fill-div">
+                      <div class="item">      
+                        <img style="margin-left: auto; margin-right: auto; display: block; width: 95%; height: 105px; object-fit: cover;" src="{{product.avt_img.url}}" alt="">
+                        <h4>{{product.name}}<br><span>Price</span></h4>
+                        <ul>
+                          <li><i class="fa fa-star"></i> 4.8</li>
+                          <li><i class="fa fa-money"></i> {{product.sell_price}}</li>
+                        </ul>
+                      </div>
+                    </a>
+                  </div>
+                  {% endfor %}
+                  
+                  <div class="col-lg-12">
+                    <div class="main-button">
+                      <a href="{% url 'category' category.platform%}">Browse more</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- ***** Live Stream End ***** -->
+          <!-- ***** Most Popular End ***** -->
+         {% endfor %}
+         
 
         </div>
       </div>
