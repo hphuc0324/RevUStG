@@ -40,7 +40,6 @@ def home(request):
         if user.groups.exists():
             group = user.groups.all()[0].name
         
-    print(group)
 
     context = {'is_logged_in': is_logged_in, 'products' : products, 'platforms': platforms, 'categories': categories,
                'hot_games' : hot_games, 'cart_items' : cart_items, 'group' : group
@@ -482,7 +481,11 @@ def register(request):
     register_form = RegisterForm()
 
     if request.method == 'POST':
-        register_form = RegisterForm(request.POST)    
+        register_form = RegisterForm(request.POST)
+        username_check = register_form['username'].value()
+        password1 = register_form['password1'].value()
+        password2 = register_form['password2'].value()
+
 
         if register_form.is_valid():
             user = register_form.save()
@@ -496,11 +499,23 @@ def register(request):
             return customer(request, user.username)
 
         else:
-            print(register_form.error_messages)
+            message = check_register(username_check, password1, password2)
+            messages.info(request, message)
 
     context = {"form" : register_form}
     return render(request, 'register.html', context)
 
+
+def check_register(username, password1, password2):
+    if password1.isdigit():
+        return 'Password can not be all numbers!'
+    if password1 != password2:
+        return 'Password mismatch!'
+    
+    users = User.objects.get(username = username)
+
+    if users is not None:
+        return 'Username existed! Please choose other name'
 
 def login(request):
     if request.method == 'POST':
@@ -539,7 +554,7 @@ def customer(request, name):
 
     try:
         purchased_item = PurchasedItem.objects.filter(customer = name)
-        print(purchased_item)
+
     except:
         purchased_item = None
     context = {'customer' : customer, 'purchased_item' : purchased_item, 'cart_items' : cart_items, 'favor_items' : favor_items, 'form' : form}

@@ -47,6 +47,9 @@
                         <input type="submit" name="submit" id="submit" class="form-submit submit" value="Sign up"/>
                         <a href="{% url 'login' %}" class="submit-link submit">Sign in</a>
                     </div>
+                    {% for message in messages%}
+                        <div style="width: 100%; height: 30px; background-color: red; text-align: center;">{{message}}</div>       
+                    {% endfor %}
                 </form>
             </div>
         </div>
