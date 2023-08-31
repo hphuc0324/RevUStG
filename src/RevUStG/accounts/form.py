@@ -18,7 +18,16 @@ class RegisterForm(UserCreationForm):
 
     def clean(self) -> Dict[str, Any]:
         return super().clean()
-    
+
+
+class CustomerUpdateForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+        exclude = ['user', 'coins']
+
+    def clean(self) -> Dict[str, Any]:
+        return super().clean()
 
 class PhoneCardForm(ModelForm):
     class Meta:

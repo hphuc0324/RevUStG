@@ -95,8 +95,12 @@ https://templatemo.com/tm-579-cyborg-gaming
                     <div class="col-lg-12">
                         <div style ="display: flex; justify-content: space-between;" class="heading-section">
                             <h4 style="font-family:'Bootstrap-icons';">TOTAL: {{total}} &#xF634;</h4>
+                            {% if items %}
                             <div style="margin-right: 20px;"  class="main-border-button"><a href="{% url 'purchase' %}">Purchase</a></div>
-                        </div>
+                            {% else %}
+                            <div style="margin-right: 20px;"  class="main-border-button border-no-active"><a href="#">Purchase</a></div>
+                            {% endif %}
+                          </div>
                     </div>
                 </div>
 
@@ -167,6 +171,8 @@ https://templatemo.com/tm-579-cyborg-gaming
           </div>
         </div> 
     </div>
+
+    {% include 'footer.html' %}
 </body>
 
 </html

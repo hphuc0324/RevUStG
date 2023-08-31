@@ -5,10 +5,11 @@ from django.conf.urls.static import static
 from .form import *
 from .models import *
 from .filters import *
+from .decorators import *
 import random
 
 from django.contrib.auth.models import User, Group
-
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
@@ -27,6 +28,7 @@ def home(request):
     categories = get_categories(platforms, products)
     cart_items = count_cart_item(request.user)
     
+    group = None
    
     is_logged_in = False
 
@@ -35,8 +37,13 @@ def home(request):
     else:
         is_logged_in = True
 
+        if user.groups.exists():
+            group = user.groups.all()[0].name
+        
+    print(group)
+
     context = {'is_logged_in': is_logged_in, 'products' : products, 'platforms': platforms, 'categories': categories,
-               'hot_games' : hot_games, 'cart_items' : cart_items
+               'hot_games' : hot_games, 'cart_items' : cart_items, 'group' : group
                }
 
     return render(request, 'home.html', context)
@@ -124,6 +131,8 @@ def get_related_products(sample):
     except:
         return None
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def add_to_favorite(request, id):
     product = Product.objects.get(id = id)
 
@@ -151,6 +160,8 @@ def get_status(id):
     else:
         return 'Stockout'
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def add_to_cart(request, id):
     product = Product.objects.get(id = id)
     customer = Customer.objects.get(user = request.user)
@@ -190,7 +201,8 @@ def count_cart_item(user):
         total += item.quantity
 
     return str(total)
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def buy(request, id):
     product = Product.objects.get(id = id)
     customer = Customer.objects.get(user = request.user)
@@ -227,6 +239,8 @@ def buy(request, id):
 
     return cart(request, request.user.username)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def rent(request, id):
     product = Product.objects.get(id = id)
     customer = Customer.objects.get(user = request.user)
@@ -270,7 +284,8 @@ def rent(request, id):
 
 
 #==========================CART PAGE================================
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def cart(request, name):
     user = User.objects.get(username = name)
     customer = Customer.objects.get(user= user)
@@ -475,9 +490,10 @@ def register(request):
             username = register_form.cleaned_data.get('username')
             group = Group.objects.get(name = 'customer')
             user.groups.add(group)
-            customer = Customer.objects.create(user = user, name = username)
-            Order.objects.create(customer= customer)
-            return redirect('home')
+            customer_created = Customer.objects.create(user = user, name = username)
+            Order.objects.create(customer= customer_created)
+            auth_login(request, user)
+            return customer(request, user.username)
 
         else:
             print(register_form.error_messages)
@@ -503,22 +519,47 @@ def login(request):
 
     return render(request, 'login.html')
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def customer(request, name):
     user = User.objects.get(username = name)
     customer = Customer.objects.get(user=user)
     cart_items = count_cart_item(user)
+    favor = FavoriteProduct.objects.filter(customer = customer.name)
+    favor_items = []
+    form = CustomerUpdateForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerUpdateForm(request.POST, request.FILES,instance=customer)
+        if form.is_valid():
+            form.save()
+
+    for item in favor:
+        favor_items.append(item.product)
 
     try:
         purchased_item = PurchasedItem.objects.filter(customer = name)
         print(purchased_item)
     except:
         purchased_item = None
-    context = {'customer' : customer, 'purchased_item' : purchased_item, 'cart_items' : cart_items}
+    context = {'customer' : customer, 'purchased_item' : purchased_item, 'cart_items' : cart_items, 'favor_items' : favor_items, 'form' : form}
+
+    
 
     return render(request, 'customer.html', context)
+
+
+def delete_purchased_item(request, id):
+    customer_found = Customer.objects.get(user = request.user)
+    item = PurchasedItem.objects.get(item_id = id)
+    item.delete()
+
+    return customer(request, customer_found.name)
 
 def logout(request):
     auth_logout(request)
 
     return redirect('home')
-    
+
+def admin(request):
+    return render(request, 'admin/index.html')
