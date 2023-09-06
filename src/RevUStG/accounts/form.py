@@ -24,7 +24,7 @@ class CustomerUpdateForm(ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
-        exclude = ['user', 'coins']
+        exclude = ['user', 'coins', 'profile_image']
 
     def clean(self) -> Dict[str, Any]:
         return super().clean()

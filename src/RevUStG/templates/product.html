@@ -10,10 +10,12 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title>Cyborg - Awesome HTML5 Template</title>
+    <title>RevustG</title>
+    <link rel="icon" type="image/png" href="{%static 'assets/images/favicon.png' %}">
+    
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min1.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
@@ -63,7 +65,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                           {% if favor == 'True' %}
                               <img style="width: 40px; height: 40px;" src= "{% static 'assets/images/favorite_red.png' %}">
                           {% else %}
-                              <img style="width: 40px; height: 40px;" src= "{% static 'assets/images/favorite_black.png' %}">
+                              <img style="width: 40px; height: 40px;" src= "{% static 'assets/images/favourite_black.png' %}">
                           {% endif %}
                           <div class="main-border-button"><a href="{% url 'favor' product.id %}">ADD TO FAVORITE</a></div>
                         </div>
@@ -153,7 +155,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                     <div style="display: flex; justify-content: space-evenly;">
                       {% for image in images %}
                         <div class="col-lg-4">
-                          <img style = "width: 300px; height: 230px;" src="{{product.avt_img.url}}" alt="" style="border-radius: 23px; margin-bottom: 30px;">
+                          <img style = "width: 350px; height: 230px; border-radius: 23px; margin-bottom: 30px;" src="{{image.img.url}}" alt="">
                         </div>
                       {% endfor %} 
                     </div>

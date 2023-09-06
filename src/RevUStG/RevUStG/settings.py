@@ -29,6 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,10 +45,12 @@ INSTALLED_APPS = [
 
     'accounts',
     'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -115,6 +120,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+#AWS S3
+# AWS_ACCESS_KEY_ID = 'AKIAWI3HVHTWJ7PNFSUP'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'revustg-test'
+# AWS_S3_REGION_NAME = 'us-west-2'
+
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 
 # Static files (CSS, JavaScript, Images)

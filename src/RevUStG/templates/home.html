@@ -10,10 +10,12 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    
     <title>RevustG</title>
+    <link rel="icon" type="image/png" href="{%static 'assets/images/favicon.png' %}">
 
     <!-- Bootstrap core CSS -->
-    <link href="{%static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static 'vendor/bootstrap/css/bootstrap.min1.css'%}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
@@ -101,7 +103,7 @@ https://templatemo.com/tm-579-cyborg-gaming
                         <img style="margin-left: auto; margin-right: auto; display: block; width: 95%; height: 105px; object-fit: cover;" src="{{product.avt_img.url}}" alt="">
                         <h4>{{product.name}}<br><span>Price</span></h4>
                         <ul>
-                          <li><i class="fa fa-star"></i> 4.8</li>
+                          <li><i class="fa fa-star"></i></li>
                           <li><i class="fa fa-money"></i> {{product.sell_price}}</li>
                         </ul>
                       </div>
@@ -134,6 +136,8 @@ https://templatemo.com/tm-579-cyborg-gaming
   <!-- Bootstrap core JavaScript -->
   <script src="{%static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{%static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  
+
 
   <script src="{% static 'assets/js/isotope.min.js' %}"></script>
   <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
