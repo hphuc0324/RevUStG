@@ -1,0 +1,9 @@
+We use test automation to achieve some benefits, such as:
+
+-Faster feedback loop and quicker time to market
+-Increased coverage and reduced testing fatigue
+-Faster bug discovery and improved risk mitigation
+-More efficient software and app testing
+-Better manual testing by freeing up testers time
+
+We need test automation when we want to save time, achieve deliverables faster, and improve software quality

@@ -1,0 +1,6 @@
+- Gant chart: changes the review sprint day of all sprint to a more suitable day. Last time, we misunderstood review sprint is used for the previous sprint
+- Product features:
+	+ Update Login's priority to High
+	+ Separate Purchase and Rent feature into two features
+	+ Add Search Feature, Add Product, Delete product, Update product, Rate product
+- Update Non-Functional Requirements
